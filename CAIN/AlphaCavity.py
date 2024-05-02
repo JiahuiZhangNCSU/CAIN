@@ -14,6 +14,7 @@ if __name__ == '__main__':
     parser.add_argument('--tunnel_d', type=float, default=2.8, help='Distance cutoff for the tunnel cavities')
     parser.add_argument('--aa', type=bool, default=False, help='Whether to use all atom representation')
     parser.add_argument('--save_pdb', type=bool, default=True, help='Whether to save the pdb files')
+    parser.add_argument('--do_clustering', type=bool, default=False, help='Whether to do the pockets clustering')
     parser.add_argument('--save_csv', type=bool, default=True, help='Whether to save the csv files')
     parser.add_argument('--get_all_volumes', type=bool, default=False, help='Whether to get all the volumes of the cavities')
     parser.add_argument('--get_ligand_pocket_volume', type=bool, default=False, help='Whether to get the volume of the ligand pocket')
@@ -41,7 +42,10 @@ if __name__ == '__main__':
     # initialize the ligand crds.
     alpha_cavity.get_ligand_crds(ligand_file)
     # get the pockets.
-    alpha_cavity.get_pocket()
+    if args.do_clustering:
+        alpha_cavity.get_pockets_clustering()
+    else:
+        alpha_cavity.get_pockets_as_whole()
     # get the ligand pocket.
     alpha_cavity.get_ligand_pocket()
     # get the ligand tunnel.
