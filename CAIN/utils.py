@@ -339,6 +339,9 @@ class AlphaCavity:
             self.ligand_crds = read_ligand_pdb(ligand_file)
         elif ligand_file.endswith('.sdf'):
             self.ligand_crds = read_ligand_sdf(ligand_file)
+    
+    def get_pockets_as_whole(self):
+        self.pockets = [Pocket(self.AlphaSpheres)]
 
     def get_pockets(self):
         self.pockets = clustering_alpha_spheres(self.AlphaSpheres)
